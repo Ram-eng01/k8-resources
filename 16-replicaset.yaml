@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: ReplicaSet
 metadata:
-  name: nginx-Replica
+  name: nginx-replica-example
   # these labels beongs to repica set resource
   labels:
     app: nginx
