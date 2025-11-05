@@ -8,7 +8,7 @@ metadata:
     tier: db 
 spec:
   replicas: 2
-  slector:
+  selector:
     matchLabels:
       component: mysql
       project: expense
