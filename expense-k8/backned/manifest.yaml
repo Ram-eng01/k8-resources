@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backened
+  namespace: expense
+  labels:
+    component: backened
+    project: expense
+    tier: app 
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: backened
+      project: expense
+      tier: app
+  template:
+    metadata:
+      labels:
+        component: backened
+        project: expense
+        tier: app
+        environment: dev
+    spec:
+      containers:
+      - name: backened
+        image: joindevops/backened:v1.0
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: backened
+  namespace: expense
+spec:
+  selector:
+    component: backened
+    project: expense
+    tier: app
+    environment: dev
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
