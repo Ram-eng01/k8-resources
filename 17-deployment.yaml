@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment-eaxmple
+  # these labels belongs to deployment resource
+  labels:
+    app: nginx
+    tier: frontend
+    purpose: depoyment
+spec:
+  # modify replicas according to your case
+  replicas: 3
+  selector:
+    matchLabels:
+      tier: frontend
+      app: web
+      environment: dev
+  # below is pod defination
+  template:
+    metadata:
+      labels:
+        tier: frontend
+        app: web
+        environment: dev
+        project: expense
+    spec:
+      containers:
+      - name: nginx
+        image: nginx:stabel-perl
+        
