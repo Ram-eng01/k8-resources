@@ -47,7 +47,7 @@ metadata:
   name: frontend
   namespace: expense
 spec:
-  type: nodePort
+  type: NodePort
   selector:
     component: frontend
     project: expense
