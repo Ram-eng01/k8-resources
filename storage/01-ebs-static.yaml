@@ -9,15 +9,16 @@ spec:
     storage: 10Gi
   csi:
     driver: ebs.csi.aws.com
-    fstype: ext4
+    fsType: ext4
     volumeHandle: vol-078b1f010164441c0
 
 ---
 apiVersion: v1
-kind: PersistentVolumeclaim
+kind: PersistentVolumeClaim
 metadata:
   name: ebs-claim
 spec:
+  storageClassName: "" # Empty string must be explicitly set otherwise default StorageClass will be set
   volumeName: ebs-static
   accessModes:
   - ReadWriteOnce
@@ -40,11 +41,12 @@ spec:
     volumeMounts:
     - name: persistent-storage
       mountPath: /usr/share/nginx/html
-      
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1a   
   volumes:
   - name: persistent-storage
-    PersistentVolumeclaim: 
-      claimName: ebs-static
+    persistentVolumeClaim: 
+      claimName: ebs-claim
 
 ---
 apiVersion: v1
